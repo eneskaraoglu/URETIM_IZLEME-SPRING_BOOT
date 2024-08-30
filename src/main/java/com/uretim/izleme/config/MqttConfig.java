@@ -1,6 +1,9 @@
 package com.uretim.izleme.config;
 
+import java.io.IOException;
+
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -14,6 +17,10 @@ import org.springframework.messaging.MessageHandler;
 
 @Configuration
 public class MqttConfig {
+	
+    @Autowired
+    private MyWebSocketHandler webSocketHandler;  // WebSocket handler'ı enjekte ediyoruz
+
 
     private static final String MQTT_BROKER_URL = "tcp://localhost:1883";
     private static final String MQTT_CLIENT_ID = "spring-boot-client";
@@ -44,13 +51,22 @@ public class MqttConfig {
         return adapter;
     }
 
+
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return message -> {
             String payload = (String) message.getPayload();
             System.out.println("Received message: " + payload);
-            // Gelen mesajı işleyin
+            
+            // WebSocket ile frontend'e gönder
+            try {
+                webSocketHandler.sendMessageToAll(payload);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         };
     }
+
+
 }
