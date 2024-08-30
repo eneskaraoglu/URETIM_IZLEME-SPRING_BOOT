@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>RabbitMQ - Esp32 MQTT Client</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+	<div id="main_chart_div" align="center" style="width: 1000px;">
+		<h2>MQTT Clients</h2>
+		<!-- <div id="line_chart" style="height: 500px"></div> -->
+	</div>
+	<script th:inline="javascript">
+		var real_data = /*[[${chartData}]]*/'noValue';
+		$(document).ready(function() {
+			google.charts.load('current', {
+				packages : [ 'corechart', 'bar' ]
+			});
+			google.charts.setOnLoadCallback(setup);
+		});
+		function setup() {
+			drawChart();
+			setInterval(drawChart, 1000);
+		}
+		function drawChart() {
+			$.ajax({
+				url : 'http://localhost:8080/main',
+				type : 'get',
+				success : function(json) {
+					console.log(json);
+
+					for ( var clientId in json) {
+						$("#main_chart_div").append("<div id='line_chart_" + clientId + "' style='height: 500px'></div>");
+						
+						var data = new google.visualization.DataTable();
+						data.addColumn('datetime', 'Date Time');
+						data.addColumn('number', 'Data');
+
+						json[clientId].forEach(function(obj) {
+							data.addRow([ new Date(obj[0]), obj[1] ]);
+						});
+
+						var options = {
+							title : 'Client : ' + clientId,
+							legend : {
+								position : 'bottom'
+							}
+						};
+
+						var chart = new google.visualization.LineChart(document
+								.getElementById('line_chart_'+clientId));
+
+						chart.draw(data, options);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>
