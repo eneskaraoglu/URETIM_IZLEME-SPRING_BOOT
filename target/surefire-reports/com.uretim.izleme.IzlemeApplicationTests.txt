@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.uretim.izleme.IzlemeApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.557 s -- in com.uretim.izleme.IzlemeApplicationTests

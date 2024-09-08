@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+    <title>Real-Time Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@latest"></script>
+
+    <style>
+        /* Grafikleri yan yana göster */
+        #chart-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Satır dolduğunda yeni satıra geç */
+            gap: 20px; /* Grafikler arasındaki boşluk */
+            padding: 20px;
+        }
+
+        /* Her bir grafik için stil ayarları */
+        canvas {
+            max-width: 500px; /* Maksimum genişlik ayarı */
+            max-height: 300px; /* Maksimum yükseklik ayarı */
+            flex: 1; /* Flex-grow kullanarak grafikleri eşit genişlikte yapar */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="right_col" role="main" data-layout-fragment="content">
+        <div id="chart-container">
+            <canvas id="chart1"></canvas>
+            <canvas id="chart2"></canvas>
+            <canvas id="chart3"></canvas>
+        </div>
+
+        <script>
+            // Grafik oluşturma fonksiyonu
+            function createChartConfig(label, borderColor, backgroundColor) {
+                return {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: label,
+                            data: [],
+                            borderColor: borderColor,
+                            backgroundColor: backgroundColor,
+                            borderWidth: 1,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, /* Grafiklerin sabit oranını korumasını devre dışı bırakır */
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        return `Yük: ${tooltipItem.raw}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'second'
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Zaman'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Yük'
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+
+            // Grafik konfigürasyonları
+            const config1 = createChartConfig('A001', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 0.2)');
+            const config2 = createChartConfig('B001', 'rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 0.2)');
+            const config3 = createChartConfig('C001', 'rgba(153, 102, 255, 1)', 'rgba(153, 102, 255, 0.2)');
+
+            // Grafik kontekstleri ve oluşturma
+            const chart1 = new Chart(document.getElementById('chart1').getContext('2d'), config1);
+            const chart2 = new Chart(document.getElementById('chart2').getContext('2d'), config2);
+            const chart3 = new Chart(document.getElementById('chart3').getContext('2d'), config3);
+
+            // WebSocket mesajını işleme fonksiyonu
+            function updateChart(message) {
+                const dataPoint = JSON.parse(message);
+                const time = new Date(dataPoint.time);
+                const yük = parseInt(dataPoint.yuk, 10);
+                const makine = dataPoint.makine;
+
+                let chart, data;
+
+                // Makineye göre doğru grafiği seç
+                switch (makine) {
+                    case 'A001':
+                        chart = chart1;
+                        data = config1.data;
+                        break;
+                    case 'B001':
+                        chart = chart2;
+                        data = config2.data;
+                        break;
+                    case 'C001':
+                        chart = chart3;
+                        data = config3.data;
+                        break;
+                    default:
+                        return; // Tanımadığınız bir makine varsa, işleme almayın
+                }
+
+                // Grafik verilerini güncelle
+                if (data.labels.length > 20) {
+                    data.labels.shift();
+                    data.datasets[0].data.shift();
+                }
+
+                data.labels.push(time);
+                data.datasets[0].data.push(yük);
+
+                chart.update();
+            }
+
+            // WebSocket bağlantısı ve mesaj işleyici
+            const ws = new WebSocket('ws://localhost:8080/mqtt-data');
+            ws.onmessage = function (event) {
+                updateChart(event.data);
+            };
+        </script>
+    </div>
+</body>
+</html>

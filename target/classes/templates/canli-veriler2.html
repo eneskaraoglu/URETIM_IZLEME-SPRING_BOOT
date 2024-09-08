@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Canlı Makine Verileri</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Canlı Makine Verileri</h1>
+    <p th:text="${message}"></p>
+    
+    <!-- Canlı veriler burada görüntülenecek -->
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Makine</th>
+                    <th>Zaman</th>
+                    <th>Durum</th>
+                    <th>Yük</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Örnek olarak verileri gösterecek bir döngü -->
+                <tr th:each="veri : ${veriler}">
+                    <td th:text="${veri.makine}"></td>
+                    <td th:text="${veri.time}"></td>
+                    <td th:text="${veri.status}"></td>
+                    <td th:text="${veri.yuk}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

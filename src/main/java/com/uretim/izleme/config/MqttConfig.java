@@ -15,6 +15,10 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.uretim.izleme.entity.MakineVerisi;
+import com.uretim.izleme.repository.MakineVerisiRepository;
+
 @Configuration
 public class MqttConfig {
 	
@@ -52,21 +56,31 @@ public class MqttConfig {
     }
 
 
+
+    @Autowired
+    private MakineVerisiRepository makineDataRepository;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
         return message -> {
             String payload = (String) message.getPayload();
             System.out.println("Received message: " + payload);
-            
-            // WebSocket ile frontend'e gönder
+
+            // JSON'u MakineData nesnesine çevir
             try {
+            	MakineVerisi makineData = objectMapper.readValue(payload, MakineVerisi.class);
+                // MongoDB'ye kaydet
+                makineDataRepository.save(makineData);
+
+                // WebSocket ile frontend'e gönder
                 webSocketHandler.sendMessageToAll(payload);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         };
     }
-
 
 }

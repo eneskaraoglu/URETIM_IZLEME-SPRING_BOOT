@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+<title>Plain Page</title>
+</head>
+
+<body>
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>Üretim Takip</h3>
+				</div>
+
+				<div class="title_right">
+					<div
+						class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+						<div class="input-group">
+							<input type="text" class="form-control"
+								placeholder="Search for..."> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="button">Go!</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_title">
+							<h2>Proje Tanımı:</h2>
+							<ul class="nav navbar-right panel_toolbox">
+								<li><a class="collapse-link"><i
+										class="fa fa-chevron-up"></i></a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-expanded="false"><i
+										class="fa fa-wrench"></i></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Settings 1</a></li>
+										<li><a href="#">Settings 2</a></li>
+									</ul></li>
+								<li><a class="close-link"><i class="fa fa-close"></i></a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<p>Bu proje, bir üretim hattında gerçekleşen işlemleri
+								izlemek ve raporlamak için tasarlanmış bir sistemdir. Üretim
+								hattındaki makinelerin durumu, üretim sürecinin her aşamasında
+								toplanan verilerle takip edilir ve bu veriler MongoDB'de
+								saklanır. Sistem, makinelerin çalışma süresi, arıza durumu,
+								üretilen ürün sayısı gibi bilgileri toplayarak kullanıcıya
+								gerçek zamanlı raporlar sunar.</p>
+
+							<h3>Ana Özellikler:</h3>
+							<ul>
+								<li><strong>Makine Durumu İzleme:</strong>
+									<ul>
+										<li>Her makinenin durumu (çalışıyor, durdu, arızalı)
+											izlenir.</li>
+										<li>Veriler gerçek zamanlı olarak MongoDB'ye kaydedilir.</li>
+									</ul></li>
+								<li><strong>Üretim Verisi Toplama:</strong>
+									<ul>
+										<li>Her bir üretim hattında üretilen ürünlerin sayısı
+											kaydedilir.</li>
+										<li>Üretim süreçleri ve süreleri izlenir.</li>
+									</ul></li>
+								<li><strong>Raporlama:</strong>
+									<ul>
+										<li>Günlük, haftalık ve aylık üretim raporları
+											oluşturulur.</li>
+										<li>Makine arızalarının sıklığı ve süresi hakkında
+											raporlar sunulur.</li>
+										<li>Üretim verimliliği raporları.</li>
+									</ul></li>
+								<li><strong>Kullanıcı Yönetimi:</strong>
+									<ul>
+										<li>Farklı kullanıcı rolleri (yönetici, operatör, bakım
+											personeli) oluşturulabilir.</li>
+										<li>Her kullanıcının yetkilerine göre sistemdeki erişim
+											düzeyleri belirlenir.</li>
+									</ul></li>
+								<li><strong>Gerçek Zamanlı Uyarılar:</strong>
+									<ul>
+										<li>Makine arızaları veya üretim hattındaki durmalar gibi
+											kritik durumlar için gerçek zamanlı uyarılar gönderilir.</li>
+									</ul></li>
+							</ul>
+
+							<h3>Teknolojik Yığın:</h3>
+							<ul>
+								<li><strong>Backend:</strong> Java Spring Boot</li>
+								<li><strong>Veritabanı:</strong> MongoDB (veri esnekliği ve
+									ölçeklenebilirliği için)</li>
+								<li><strong>Frontend:</strong> Thymeleaf</li>
+								<li><strong>Gerçek Zamanlı Veri:</strong> WebSockets veya
+									RabbitMQ gibi bir mesajlaşma kuyruğu sistemi</li>
+								<li><strong>Güvenlik:</strong> Spring Security</li>
+							</ul>
+
+							<h3>Adımlar:</h3>
+							<ol>
+								<li><strong>Proje Kurulumu:</strong> Spring Boot projesini
+									başlatın ve MongoDB ile bağlantısını kurun.</li>
+								<li><strong>Veri Modelleme:</strong> MongoDB'de üretim
+									hattı, makine, ürün ve kullanıcı gibi ana koleksiyonları
+									tasarlayın.</li>
+								<li><strong>Servis ve Controller Katmanları:</strong>
+									<ul>
+										<li>Üretim hattı verilerinin toplanması ve raporlanması
+											için servisler oluşturun.</li>
+										<li>Kullanıcı giriş, kayıt ve yetkilendirme işlemleri
+											için gerekli controller'ları yazın.</li>
+									</ul></li>
+								<li><strong>Gerçek Zamanlı İzleme:</strong>
+									<ul>
+										<li>Makine durumu ve üretim verilerini gerçek zamanlı
+											olarak izlemek için gerekli altyapıyı kurun.</li>
+										<li>WebSockets veya bir mesajlaşma kuyruğu sistemi
+											kullanarak uyarıları yönetin.</li>
+									</ul></li>
+								<li><strong>Raporlama Modülü:</strong> Veritabanında
+									toplanan verileri analiz edip raporlar oluşturacak bir modül
+									geliştirin.</li>
+							</ol>
+
+							<p>Bu proje, üretim sanayisinde verimlilik ve operasyonel
+								iyileştirmeler için faydalı olabilecek bir sistem sunar. Aynı
+								zamanda, Spring Boot ve MongoDB ile tam anlamıyla entegre bir
+								uygulama geliştirme fırsatı sağlar.</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

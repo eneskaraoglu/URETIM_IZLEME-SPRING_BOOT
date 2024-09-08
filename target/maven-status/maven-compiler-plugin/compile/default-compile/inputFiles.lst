@@ -1,0 +1,13 @@
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\config\MqttConfig.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\config\MyWebSocketHandler.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\config\ThymeleafWebMvcConfig.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\config\WebSocketConfig.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\controller\PageController.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\controller\StatusController.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\controller\UretimTestController.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\entity\MakineVerisi.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\IzlemeApplication.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\repository\MakineVerisiRepository.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\services\MakineVerisiService.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\services\MqttListenerService.java
+D:\URETIM_IZLEME\SPRING_BOOT\izleme\src\main\java\com\uretim\izleme\services\MqttMessageProcessorService.java

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ana Ekran</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+        .sidebar i {
+            margin-right: 10px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .content h1 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sol Taraf: Menü -->
+    <div class="sidebar">
+        <h2>Menü</h2>
+        <a href="#" th:href="@{/canliveriler}">
+            <i class="fas fa-chart-line"></i> Canlı Makine Verileri
+        </a>
+        <a href="#" th:href="@{/makine-tanimlamalari}">
+            <i class="fas fa-cogs"></i> Makine Tanımlamaları
+        </a>
+        <a href="#" th:href="@{/kullanici-tanimlamalari}">
+            <i class="fas fa-user"></i> Kullanıcı Tanımlamaları
+        </a>
+        <a href="#" th:href="@{/makine-ozet}">
+            <i class="fas fa-list-alt"></i> Makine Özet Bilgileri
+        </a>
+    </div>
+
+    <!-- Sağ Taraf: İçerik -->
+    <div class="content">
+        <h1>Hoş Geldiniz</h1>
+        <p>Bu uygulamada canlı makine verilerini takip edebilir, makine ve kullanıcı tanımlamaları yapabilirsiniz.</p>
+        <p>Sol menüden ilgili bölümlere geçiş yapabilirsiniz.</p>
+        <!-- Daha fazla içerik veya özet bilgileri buraya ekleyebilirsiniz -->
+    </div>
+</body>
+</html>

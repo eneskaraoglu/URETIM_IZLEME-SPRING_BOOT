@@ -23,7 +23,6 @@ public class UretimTestController {
 	
 	@GetMapping("/status")
 	public String getStatus(Model model) {
-		
 		return "status";
 	}
 }

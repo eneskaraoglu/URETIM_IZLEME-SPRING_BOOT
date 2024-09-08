@@ -1,0 +1,13 @@
+com\uretim\izleme\services\MqttListenerService.class
+com\uretim\izleme\controller\StatusController.class
+com\uretim\izleme\repository\MakineVerisiRepository.class
+com\uretim\izleme\config\MyWebSocketHandler.class
+com\uretim\izleme\config\MqttConfig.class
+com\uretim\izleme\config\WebSocketConfig.class
+com\uretim\izleme\services\MqttMessageProcessorService.class
+com\uretim\izleme\IzlemeApplication.class
+com\uretim\izleme\controller\PageController.class
+com\uretim\izleme\services\MakineVerisiService.class
+com\uretim\izleme\config\ThymeleafWebMvcConfig.class
+com\uretim\izleme\entity\MakineVerisi.class
+com\uretim\izleme\controller\UretimTestController.class

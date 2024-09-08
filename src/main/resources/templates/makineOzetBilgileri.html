@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Makine Özet Bilgileri</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Google Charts'ı yükle
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // API'yi çağır
+            fetch('http://localhost:8080/api/status-counts')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Gelen Veri:", data);
+
+                    // Grafikte kullanılabilir veriyi oluştur
+                    const chartData = [["Makine", "Status", "Count"]];
+
+                    Object.entries(data).forEach(([makine, statuses]) => {
+                        Object.entries(statuses).forEach(([status, count]) => {
+                            chartData.push([makine, status, count]);
+                        });
+                    });
+
+                    // Verileri Google Charts formatına dönüştür
+                    const dataTable = google.visualization.arrayToDataTable(chartData);
+
+                    // Grafik ayarları
+                    const options = {
+                        title: 'Makine Durumları',
+                        hAxis: { title: 'Makine' },
+                        vAxis: { title: 'Count' },
+                        legend: { position: 'bottom' }
+                    };
+
+                    // Grafiği çiz
+                    const chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                    chart.draw(dataTable, options);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+    </script>
+</head>
+<body>
+
+<h2>Makine Özet Bilgileri</h2>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+</body>
+</html>

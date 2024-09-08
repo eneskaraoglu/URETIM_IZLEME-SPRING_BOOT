@@ -1,229 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-layout-decorate="~{fragments/layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Real-Time Data Visualization</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@latest"></script>
-    <style>
-        #chart-container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        canvas {
-            width: 100% !important;
-            height: 400px !important;
-        }
-    </style>
+    <title>Main Page</title>
 </head>
+
 <body>
-<div id="chart-container">
-    <canvas id="chart1"></canvas>
-    <canvas id="chart2"></canvas>
-    <canvas id="chart3"></canvas>
+<div class="right_col" role="main" data-layout-fragment="content">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Main Page</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Plain Page</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        Add content to the page ...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<script>
-    // İlk grafik için kontekst
-    const ctx1 = document.getElementById('chart1').getContext('2d');
-    const ctx2 = document.getElementById('chart2').getContext('2d');
-    const ctx3 = document.getElementById('chart3').getContext('2d');
-
-    // Grafik verileri
-    const data1 = {
-        labels: [],
-        datasets: [{
-            label: 'Yük',
-            data: [],
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderWidth: 1,
-            fill: true
-        }]
-    };
-
-    const data2 = {
-        labels: [],
-        datasets: [{
-            label: 'Yük',
-            data: [],
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderWidth: 1,
-            fill: true
-        }]
-    };
-
-    const data3 = {
-        labels: [],
-        datasets: [{
-            label: 'Yük',
-            data: [],
-            borderColor: 'rgba(153, 102, 255, 1)',
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderWidth: 1,
-            fill: true
-        }]
-    };
-
-    // Grafik konfigürasyonları
-    const config1 = {
-        type: 'line',
-        data: data1,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return `Yük: ${tooltipItem.raw}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'second'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Zaman'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Yük'
-                    }
-                }
-            }
-        },
-    };
-
-    const config2 = {
-        type: 'line',
-        data: data2,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return `Yük: ${tooltipItem.raw}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'second'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Zaman'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Yük'
-                    }
-                }
-            }
-        },
-    };
-
-    const config3 = {
-        type: 'line',
-        data: data3,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return `Yük: ${tooltipItem.raw}`;
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'second'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Zaman'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Yük'
-                    }
-                }
-            }
-        },
-    };
-
-    // Grafik oluşturma
-    const chart1 = new Chart(ctx1, config1);
-    const chart2 = new Chart(ctx2, config2);
-    const chart3 = new Chart(ctx3, config3);
-
-    function updateChart(message) {
-        const dataPoint = JSON.parse(message);
-        const time = new Date(dataPoint.time);
-        const yük = parseInt(dataPoint.yuk, 10);
-        const makine = dataPoint.makine;
-
-        let chart;
-        let data;
-
-        if (makine === 'A001') {
-            chart = chart1;
-            data = data1;
-        } else if (makine === 'B001') {
-            chart = chart2;
-            data = data2;
-        } else if (makine === 'C001') {
-            chart = chart3;
-            data = data3;
-        } else {
-            return; // Tanımadığınız bir makine varsa, işleme almayın
-        }
-
-        if (data.labels.length > 20) {
-            data.labels.shift();
-            data.datasets[0].data.shift();
-        }
-
-        data.labels.push(time);
-        data.datasets[0].data.push(yük);
-
-        chart.update();
-    }
-
-    const ws = new WebSocket('ws://localhost:8080/mqtt-data');
-    ws.onmessage = function(event) {
-        updateChart(event.data);
-    };
-</script>
 </body>
 </html>

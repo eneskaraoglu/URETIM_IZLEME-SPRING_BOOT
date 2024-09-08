@@ -53,3 +53,7 @@ Bu proje, üretim sanayisinde verimlilik ve operasyonel iyileştirmeler için fa
 
 test için ;
 http://localhost:8080/test/makineListesi
+
+
+
+http://localhost:8080/
